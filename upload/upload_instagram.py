@@ -266,6 +266,10 @@ def upload_to_instagram(video_path, caption, is_story=False):
         st_resp = requests.get(st_url, params=st_params, timeout=30)
         st_code = st_resp.json().get("status_code", "UNKNOWN")
         print(f"[instagram] Status after 60s: {st_code}")
+        if st_code == "ERROR":
+            print("[instagram] Video processing failed on Instagram servers!")
+            print("[instagram] The hosting URL may be blocked - skipping publish.")
+            return {'status': 'skipped', 'reason': 'Instagram processing error', 'platform': 'instagram'}
         if st_code != "FINISHED":
             print("[instagram] Waiting 30 more seconds...")
             time.sleep(30)
