@@ -221,9 +221,21 @@ def upload_to_instagram(video_path, caption, is_story=False):
     upload_path = compressed
 
     try:
-        print("[instagram] Step 1: Uploading to temporary hosting...")
-        video_url = upload_to_temporary_host(upload_path)
-        print(f"[instagram] Temporary URL created: {video_url}")
+        print("[instagram] Step 1: Uploading to GitHub raw URL...")
+        import subprocess as _sp, uuid as _uuid, os as _os
+        _vid_name = "ig_" + _uuid.uuid4().hex[:8] + ".mp4"
+        _os.system("cp " + str(upload_path) + " " + _vid_name)
+        _os.system("git config --global user.email bot@bot.com")
+        _os.system("git config --global user.name Bot")
+        _os.system("git add -f " + _vid_name)
+        _os.system("git commit -m \"add " + _vid_name + "\"")
+        for _ in range(3):
+            _ret = _os.system("git push origin main")
+            if _ret == 0:
+                break
+            time.sleep(5)
+        video_url = "https://raw.githubusercontent.com/eternityrage/mnk-tashrk/main/" + _vid_name
+        print("[instagram] GitHub raw URL: " + video_url)
 
         print(f"[instagram] Step 2: Creating Instagram {media_type} container...")
 
