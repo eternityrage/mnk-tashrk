@@ -259,8 +259,16 @@ def upload_to_instagram(video_path, caption, is_story=False):
         container_id = container_response.json().get('id')
         print(f"[instagram] Container created: {container_id}")
 
-        print("[instagram] Step 3: Waiting 90 seconds for processing...")
-        time.sleep(90)
+        print("[instagram] Step 3: Waiting 60 seconds, then checking status...")
+        time.sleep(60)
+        st_url = f"https://graph.facebook.com/v21.0/{container_id}"
+        st_params = {"fields": "status_code", "access_token": access_token}
+        st_resp = requests.get(st_url, params=st_params, timeout=30)
+        st_code = st_resp.json().get("status_code", "UNKNOWN")
+        print(f"[instagram] Status after 60s: {st_code}")
+        if st_code != "FINISHED":
+            print("[instagram] Waiting 30 more seconds...")
+            time.sleep(30)
 
         # Step 4: Publish
         print("[instagram] Step 4: Publishing...")
