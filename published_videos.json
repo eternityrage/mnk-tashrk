@@ -2782,5 +2782,21 @@
             },
             "recycled": true
         }
+    },
+    {
+        "video_name": "Avatar_Video_31_subtitled.mp4",
+        "metadata": {
+            "title": "Why Attachment Is the Root of Suffering",
+            "description": "The Buddha said desire is the root of suffering. But what does that really mean? It doesn't mean you can't want things. It means your peace should not depend on getting them. When you attach your happiness to outcomes, you give your power away. True freedom comes from enjoying the journey without being chained to the destination. Drop a \ud83e\udeb7 if this resonates with you.",
+            "success_flags": {
+                "instagram_reel": true,
+                "instagram_story": true,
+                "facebook_reel": true,
+                "facebook_story": false,
+                "threads": false,
+                "youtube": false
+            },
+            "recycled": true
+        }
     }
 ]
